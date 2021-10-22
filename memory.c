@@ -10,7 +10,7 @@
 int main(int argc, char **argv)
 {
         int id;
-        int i;
+        int i=0;
         int *ptr;
         system("ipcs -m");
         id = shmget(KEY, sizeof(int), IPC_CREAT | PERMS); system("ipcs -m");
