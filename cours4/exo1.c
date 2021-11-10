@@ -21,10 +21,9 @@ int main() {
   int *ptr,*ptr1;
   int i=65;
 
-  pthread_create(&thread2, NULL, f2,&i);
+  pthread_create(&thread2, NULL, f1,&i);
   sleep(1);
-  pthread_create(&thread1, NULL, f1,&i);
-
+  pthread_create(&thread1, NULL, f2,&i);
 
   printf("%d\n",i);
 

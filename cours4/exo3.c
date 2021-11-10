@@ -11,7 +11,6 @@ void * f1(void *arg) {
 
   sem_wait(r3);
   sleep(1);
-  printf("--1\n");
   sem_post(r1);
   pthread_exit(NULL);
 
@@ -20,7 +19,6 @@ void * f2(void *arg) {
 
   sem_wait(r1);
   sleep(1);
-  printf("--2\n");
   sem_post(r2);
   pthread_exit(NULL);
 }
@@ -28,7 +26,6 @@ void * f3(void *arg) {
 
   sem_wait(r2);
   sleep(1);
-  printf("--3\n");
   sem_post(r3);
   pthread_exit(NULL);
 }
@@ -44,14 +41,17 @@ int main() {
   int *ptr,*ptr1,*ptr2;
   pthread_t thread1,thread2,thread3;
 
-
   pthread_create(&thread1, NULL, f1,NULL);
   pthread_create(&thread2, NULL, f2,NULL);
   pthread_create(&thread3, NULL, f3,NULL);
 
-
     pthread_join(thread1,NULL);
     pthread_join(thread2,NULL);
     pthread_join(thread3,NULL);
+
+    sem_unlink("/mysem4");
+    sem_unlink("/mysem5");
+    sem_unlink("/mysem6");
+
 
 }
