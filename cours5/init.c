@@ -64,7 +64,8 @@ address_t myAllocCont(mem_t* mem,int nb)
                 }
 
         }
-        return -1; // On return -1 en cas de non disponibilte de nb case de libre
+
+       return EXIT_FAILURE;// On return  FAILLURE en cas de non disponibilte de nb case de libre
 }
 
 
@@ -90,7 +91,8 @@ address_t myAllocRam(int vec_ram[SIZE1],int nb)
                 }
 
         }
-        return -1; // On return -1 en cas de non disponibilte de nb case de libre
+
+      return EXIT_FAILURE;// On return -1 en cas de non disponibilte de nb case de libre
 }
 
 
@@ -134,13 +136,10 @@ address_t myAlloc(mem_t* mem,int nb)
           address_t adress_ram = myAllocRam(&mem->vec_mem[SIZE1],pagesize);
           int frame = adress_ram/pagesize;
           mem->page[page]=frame;
-    //     printf("Adress ram : %d Frame : %d\n",adress_ram,frame);
+          //printf("Adress ram : %d Frame : %d\n",adress_ram,frame);
         }
-        //problem offset
-        //printf("offset : %d\n",address%pagesize);
-
+          //printf("offset : %d\n",address%pagesize);
         return address;
-
 }
 
 
@@ -179,7 +178,6 @@ byte_t myRead(mem_t *mp, address_t p)
 }
 
 
-
 int main() {
 
         mem_t* mem = initMem();
@@ -187,7 +185,7 @@ int main() {
         address_t adr1 = myAlloc(mem, 50);
         address_t adr2 = myAlloc(mem, 10);
         address_t adr3 = myAlloc(mem, 100);
-        printf("%d-%d-%d\n",adr1,adr2,adr3);
+        printf("Adresse logique : %d-%d-%d\n",adr1,adr2,adr3);
 
         myFree(mem, adr1, 50);
         myFree(mem, adr2, 100);
@@ -197,8 +195,8 @@ int main() {
 
         byte_t val1 = myRead(mem, adr3);
         byte_t val2 = myRead(mem, adr3+9);
-        printf("%d-%d\n",val1,val2);
+        printf("Lecture des valeurs : %d-%d\n",val1,val2);
 
         address_t adr4 = myAlloc(mem, 19);
-        //display(mem->physmem);
+      //  display(mem->page);
 }
