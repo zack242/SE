@@ -198,5 +198,5 @@ int main() {
         printf("Lecture des valeurs : %d-%d\n",val1,val2);
 
         address_t adr4 = myAlloc(mem, 19);
-      //  display(mem->page);
+      //display(mem->page)j;
 }
